@@ -1,6 +1,6 @@
 public class DoubleLinkedListWithTail<T> {
     public DoubleNode<T> head;
-    public DoubleNode<T> tail; // <-- Puntero extra al final
+    public DoubleNode<T> tail; 
 
     public DoubleLinkedListWithTail() {
         this.head = null;
@@ -11,19 +11,19 @@ public class DoubleLinkedListWithTail<T> {
         return head == null;
     }
 
-    // PushFront: O(1)
+    
     public void pushFront(T key) {
         DoubleNode<T> newNode = new DoubleNode<>(key);
         newNode.next = head;
         if (head != null) {
             head.prev = newNode;
         } else {
-            tail = newNode; // Si estaba vacía, el tail es el mismo nodo
+            tail = newNode; 
         }
         head = newNode;
     }
 
-    // PopFront: O(1)
+    
     public void popFront() {
         if (empty()) {
             throw new RuntimeException("La lista está vacía");
@@ -32,11 +32,11 @@ public class DoubleLinkedListWithTail<T> {
         if (head != null) {
             head.prev = null;
         } else {
-            tail = null; // Si quedó vacía, limpiamos el tail
+            tail = null; 
         }
     }
 
-    // PushBack: ¡O(1) absoluto! Usamos el tail para saltar al final
+    
     public void pushBack(T key) {
         DoubleNode<T> newNode = new DoubleNode<>(key);
         if (empty()) {
@@ -48,7 +48,7 @@ public class DoubleLinkedListWithTail<T> {
         }
     }
 
-    // PopBack: ¡O(1) absoluto! Usamos el prev del tail para desconectar
+   
     public void popBack() {
         if (empty()) {
             throw new RuntimeException("La lista está vacía");
@@ -58,10 +58,10 @@ public class DoubleLinkedListWithTail<T> {
             return;
         }
         tail = tail.prev;
-        tail.next = null; // Cortamos el enlace hacia adelante
+        tail.next = null; 
     }
 
-    // Find: Sigue siendo O(N) porque hay que buscar el valor
+    
     public DoubleNode<T> find(T key) {
         DoubleNode<T> temp = head;
         while (temp != null) {
@@ -71,7 +71,7 @@ public class DoubleLinkedListWithTail<T> {
         return null;
     }
 
-    // Erase: Buscar es O(N), borrar es O(1)
+    
     public void erase(T key) {
         DoubleNode<T> node = find(key);
         if (node == null) return;
@@ -85,12 +85,12 @@ public class DoubleLinkedListWithTail<T> {
             return;
         }
 
-        // Puenteamos el nodo a eliminar
+        
         node.next.prev = node.prev;
         node.prev.next = node.next;
     }
 
-    // AddBefore: O(1)
+    
     public void addBefore(DoubleNode<T> node, T key) {
         if (node == null) return;
         if (node == head) {
@@ -105,7 +105,7 @@ public class DoubleLinkedListWithTail<T> {
         node.prev = newNode;
     }
 
-    // AddAfter: O(1)
+    
     public void addAfter(DoubleNode<T> node, T key) {
         if (node == null) return;
         if (node == tail) {

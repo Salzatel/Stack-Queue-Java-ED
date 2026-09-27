@@ -14,7 +14,7 @@ public class DoubleLinkedListNoTail<T> {
         DoubleNode<T> newNode = new DoubleNode<>(key);
         newNode.next = head;
         if (head != null) {
-            head.prev = newNode; // El antiguo primero ahora apunta hacia atrás al nuevo
+            head.prev = newNode; 
         }
         head = newNode;
     }
@@ -26,11 +26,11 @@ public class DoubleLinkedListNoTail<T> {
         }
         head = head.next;
         if (head != null) {
-            head.prev = null; // Desconectamos hacia atrás
+            head.prev = null; 
         }
     }
 
-    // PushBack: O(N) porque hay que recorrer todo sin un tail
+    // PushBack: O(N) recorrer todo sin un tail
     public void pushBack(T key) {
         DoubleNode<T> newNode = new DoubleNode<>(key);
         if (empty()) {
@@ -42,7 +42,7 @@ public class DoubleLinkedListNoTail<T> {
             temp = temp.next;
         }
         temp.next = newNode;
-        newNode.prev = temp; // Conectamos el nuevo nodo hacia atrás
+        newNode.prev = temp; 
     }
 
     // PopBack: O(N)
@@ -58,7 +58,7 @@ public class DoubleLinkedListNoTail<T> {
         while (temp.next != null) {
             temp = temp.next;
         }
-        temp.prev.next = null; // El penúltimo deja de apuntar al último
+        temp.prev.next = null; 
     }
 
     // Find: O(N)
@@ -71,7 +71,7 @@ public class DoubleLinkedListNoTail<T> {
         return null;
     }
 
-    // Erase: Buscar es O(N), pero desconectar es O(1)
+    
     public void erase(T key) {
         DoubleNode<T> node = find(key);
         if (node == null) return;
@@ -80,7 +80,7 @@ public class DoubleLinkedListNoTail<T> {
             popFront();
             return;
         }
-        // Desconectamos el nodo puenteando el anterior y el siguiente
+        
         if (node.next != null) {
             node.next.prev = node.prev;
         }
@@ -89,7 +89,7 @@ public class DoubleLinkedListNoTail<T> {
         }
     }
 
-    // AddBefore: ¡AHORA ES O(1)! Gracias al puntero prev
+    
     public void addBefore(DoubleNode<T> node, T key) {
         if (node == null) return;
         if (node == head) {
@@ -104,7 +104,7 @@ public class DoubleLinkedListNoTail<T> {
         node.prev = newNode;
     }
 
-    // AddAfter: O(1)
+    
     public void addAfter(DoubleNode<T> node, T key) {
         if (node == null) return;
         DoubleNode<T> newNode = new DoubleNode<>(key);

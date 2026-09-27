@@ -1,19 +1,19 @@
 public class ArrayStack<T> implements MyStack<T> {
     private T[] array;
-    private int top; // Índice del último elemento insertado
+    private int top; 
     private int capacity;
 
     @SuppressWarnings("unchecked")
     public ArrayStack(int initialCapacity) {
         this.capacity = initialCapacity;
         this.array = (T[]) new Object[capacity];
-        this.top = -1; // -1 significa que está vacía
+        this.top = -1; 
     }
 
     @Override
     public void push(T item) {
         if (size() == capacity) {
-            resize(capacity * 2); // Duplicar tamaño (O(N) ocasional, O(1) amortizado)
+            resize(capacity * 2); 
         }
         array[++top] = item;
     }
@@ -22,7 +22,7 @@ public class ArrayStack<T> implements MyStack<T> {
     public T pop() {
         if (isEmpty()) throw new RuntimeException("La pila está vacía");
         T item = array[top];
-        array[top] = null; // Evitar fugas de memoria
+        array[top] = null; 
         top--;
         return item;
     }
@@ -42,8 +42,7 @@ public class ArrayStack<T> implements MyStack<T> {
     public int size() {
         return top + 1;
     }
-
-    // Retira 'n' elementos de la pila
+    
     @Override
     public void delete(int n) {
         if (n > size()) n = size();
@@ -52,7 +51,6 @@ public class ArrayStack<T> implements MyStack<T> {
         }
     }
 
-    // Método para expandir dinámicamente el arreglo
     @SuppressWarnings("unchecked")
     private void resize(int newCapacity) {
         T[] newArray = (T[]) new Object[newCapacity];
